@@ -20,27 +20,41 @@ public class TouristAttractionController {
         this.touristAttractionService = touristAttractionService;
     }
 
+    //Get attractions
     @GetMapping("/attractions")
     public ResponseEntity<List<TouristAttraction>> getAllTouristAttractions(){
         List<TouristAttraction> touristAttractions = touristAttractionService.getAllAttractions();
         return new ResponseEntity<>(touristAttractions, HttpStatus.OK);
     }
 
+    //GET attractions/{name}
     @GetMapping("/search")
     public ResponseEntity<TouristAttraction> getTouristAttractionByName(@RequestParam String name){
         TouristAttraction touristAttraction = touristAttractionService.findAttractionByName(name);
         return new ResponseEntity<>(touristAttraction, HttpStatus.OK);
     }
 
+    //GET attractions/{name}/tags
+    // Ikke skrevet i nu...
 
+
+    //GET attractions/add
     @PostMapping("/add")
     public ResponseEntity<TouristAttraction> addAttraction (@RequestBody TouristAttraction touristAttraction){
         TouristAttraction newTouristAttraction = touristAttractionService.addTourist(touristAttraction);
         return new ResponseEntity<>(newTouristAttraction, HttpStatus.CREATED);
     }
 
+    //POST attractions/save
+    // Ikke skrevet i nu...
 
-    //Skal laves
+
+    //POST attractions/{name}/edit
+    // Ikke skrevet i nu...
+
+
+    //POST attractions/update
+    //Skal laves om til POST...
     @PutMapping("/update/{name}")
     public ResponseEntity<TouristAttraction> updateAttraction(@PathVariable String name, @RequestBody TouristAttraction updatedTouristAttraction) {
         TouristAttraction updatedAttraction = touristAttractionService.updateTouristAttraction(name, updatedTouristAttraction);
@@ -48,6 +62,8 @@ public class TouristAttractionController {
     }
 
 
+    //POST attractions/delete/{name}
+    //Skal laves om til POST...
     @DeleteMapping("{name}") @ResponseBody
     public String deleteAttraction(@PathVariable String name) {
         touristAttractionService.deleteTouristAttraction(name);
