@@ -12,7 +12,7 @@ import java.util.List;
 
 @Controller
 //Skal have en base URL før HTML virker
-@RequestMapping("/attractions")
+@RequestMapping("/attraction")
 public class TouristAttractionController {
     private final TouristAttractionService touristAttractionService;
 
@@ -20,7 +20,7 @@ public class TouristAttractionController {
         this.touristAttractionService = touristAttractionService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/attractions")
     public ResponseEntity<List<TouristAttraction>> getAllTouristAttractions(){
         List<TouristAttraction> touristAttractions = touristAttractionService.getAllAttractions();
         return new ResponseEntity<>(touristAttractions, HttpStatus.OK);
@@ -42,17 +42,13 @@ public class TouristAttractionController {
 
     //Skal laves
     @PutMapping("/update/{name}")
-    public ResponseEntity<TouristAttraction> updateAttraction(
-            @PathVariable String name,
-            @RequestBody TouristAttraction updatedTouristAttraction) {
-
+    public ResponseEntity<TouristAttraction> updateAttraction(@PathVariable String name, @RequestBody TouristAttraction updatedTouristAttraction) {
         TouristAttraction updatedAttraction = touristAttractionService.updateTouristAttraction(name, updatedTouristAttraction);
         return new ResponseEntity<>(updatedAttraction, HttpStatus.OK);
     }
 
 
-    @DeleteMapping("{name}")
-    @ResponseBody
+    @DeleteMapping("{name}") @ResponseBody
     public String deleteAttraction(@PathVariable String name) {
         touristAttractionService.deleteTouristAttraction(name);
         return "Tourist attraction with name " + name + " has been deleted.";
